@@ -14,9 +14,11 @@ bin
 var
 sdist
 develop-eggs
+include
 .installed.cfg
 lib
 lib64
+local
 
 # Installer logs
 pip-log.txt
