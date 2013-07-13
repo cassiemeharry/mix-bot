@@ -35,6 +35,16 @@ servers:
     # the bot will be unable to set up the server for you.
     rcon password: super secret passphrase goes here
 
+    # Mumble info:
+    # A link will be sent to the player when they are picked.
+    mumble:
+      server: 12.34.56.78
+      port: 64738
+      password: mumble password
+
+      red channel: PUG/Red
+      blu channel: PUG/Blu
+
 rules:
   # Options: "captain" or "random".
   # When mode is "random", teams will be random-picked as soon as

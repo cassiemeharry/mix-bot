@@ -6,10 +6,10 @@ A replacement bot for the various TF2 pick-up game IRC channels.
 
   * Both 6's and Highlander picking, as well as custom class limits.
   * The bot refuses to start picking until a pick is possible.
+  * Mumble integration, to send a link to each player along with the TF2 server info.
 
 #### Planned Features
 
-  * Mumble integration, to send a link to each player along with the TF2 server info.
   * Captain picking, with choices limited to prevent an impossible pick situation.
   * Class- and captain-restrictions.
   * PUG histories, possibly influencing the random pick mode to create more even teams.

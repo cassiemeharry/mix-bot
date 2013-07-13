@@ -33,9 +33,13 @@ def bot_command(*names, **options):
     return decorator
 
 class Bot(object):
-    def __init__(self, my_brain, rules):
+    def __init__(self, my_brain, rules, dispatcher):
         self.brain = my_brain
         self.rules = rules
+        self._dispatcher = dispatcher
+
+    def send_message_to_player(self, player_name, message):
+        self._dispatcher.queue_message(message, player_name)
 
 class Message(object):
     def __init__(self, args, from_nick, is_pm):
