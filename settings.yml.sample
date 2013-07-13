@@ -1,11 +1,12 @@
 # This is the TF2 Mix Bot configuration file.
+#
 # Everything after a # symbol is ignored and probably contains some
 # instructions on what that setting is for.
 
 network:
   # Where to connect
   server: irc.gamesurge.net
-  channel: "#tf2.mix.nahl"
+  channel: "#channel.name.here"
 
   # How many seconds should the bots wait between joins from the same IP address?
   reconnect time: 10
@@ -20,6 +21,20 @@ network:
     - MixBot3
     - MixBot4
 
+servers:
+  # The bot will send connect info to the players for the
+  # least-recently used server.
+  PUG Server:
+    # Connect info
+    server: 12.34.56.78
+    port: 27015
+    # If you want a constant password, enter it here. Otherwise the
+    # bot will choose a random password per PUG.
+    password: thepassword
+    # If you don't enter an RCON password (or enter it incorrectly),
+    # the bot will be unable to set up the server for you.
+    rcon password: super secret passphrase goes here
+
 rules:
   # Options: "captain" or "random".
   # When mode is "random", teams will be random-picked as soon as
@@ -28,8 +43,14 @@ rules:
   # with the highest total number of games.
   picking: random
 
-  # Options: "highlander" or "sixes".
+  # Options: "highlander", "sixes" or "custom".
   mode: highlander
+
+  # If mode is "custom", you must specify the class limits per team.
+  # For example, you can make this an ultiduo bot with these limits:
+  #class limits:
+  #  soldier: 1
+  #  medic: 1
 
 database:
   # How the bot stores information.
@@ -37,3 +58,7 @@ database:
 
   # Where it stores it. For sqlite, this is a filename.
   name: bot.sqlite
+
+# Local Variables:
+# mode: yaml
+# End:
