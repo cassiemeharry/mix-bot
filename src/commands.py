@@ -41,7 +41,7 @@ def pick(bot, message):
             for player, cls in sorted(player_mapping.items(), key=lambda pair: (bot.rules['valid classes'].index(pair[1]), pair[0])):
                 bot.brain.player_remove(player)
                 players.append('%s: %s' % (player, cls))
-            yield '\x03%i%s Team\x03: %s' % (team_colors[team_name], team_name, ', '.join(players))
+            yield '\x03%s%s Team\x03: %s' % (team_colors[team_name], team_name.title(), ', '.join(players))
     else:
         yield 'Captain picking not implemented yet, sorry :('
 
