@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+# -*- mode: python; coding: utf-8 -*-
+
+import os
+import sys
+import yaml
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+import network
+import commands
+import settings
+
+config = settings.load_settings()
+network.run_bot_with_settings(settings.load_settings())

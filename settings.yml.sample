@@ -1,0 +1,39 @@
+# This is the TF2 Mix Bot configuration file.
+# Everything after a # symbol is ignored and probably contains some
+# instructions on what that setting is for.
+
+network:
+  # Where to connect
+  server: irc.gamesurge.net
+  channel: "#tf2.mix.nahl"
+
+  # How many seconds should the bots wait between joins from the same IP address?
+  reconnect time: 10
+  # How many messages per minute can a single bot send without flooding?
+  messages per minute: 15
+
+  # Connect one messenger for each name listed and send messages
+  # round-robin through them to lessen throttling.
+  bot names:
+    - MixBot1
+    - MixBot2
+    - MixBot3
+    - MixBot4
+
+rules:
+  # Options: "captain" or "random".
+  # When mode is "random", teams will be random-picked as soon as
+  # there are enough players to added to do so.
+  # When mode is "captain", teams will be picked by the two players
+  # with the highest total number of games.
+  picking: random
+
+  # Options: "highlander" or "sixes".
+  mode: highlander
+
+database:
+  # How the bot stores information.
+  type: sqlite
+
+  # Where it stores it. For sqlite, this is a filename.
+  name: bot.sqlite

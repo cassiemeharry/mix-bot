@@ -1,0 +1,97 @@
+from os import path
+import yaml
+
+def _deep_merge(original, update_with):
+    result = {}
+    all_keys = set(original.keys()) | set(update_with.keys())
+    for key in all_keys:
+        if key not in original:
+            result[key] = update_with[key]
+        elif key not in update_with:
+            result[key] = original[key]
+        elif isinstance(original[key], dict) and isinstance(update_with[key], dict):
+            result[key] = _deep_merge(original[key], update_with[key])
+        else:
+            result[key] = update_with[key]
+    return result
+
+DEFAULT_BASE_SETTINGS = {
+    'rules': {
+        'picking': 'random',
+        'mode': 'highlander',
+    },
+    'network': {
+        'port': 6667,
+        'reconnect time': 15,
+        'messages per minute': 20,
+    },
+    'database': {
+        'type': 'sqlite',
+        'name': 'bot.sqlite',
+    },
+}
+
+DEFAULT_HIGHLANDER_SETTINGS = {
+    'rules': {
+        'mode': 'highlander',
+        'class limits': {
+            'scout': 1,
+            'soldier': 1,
+            'pyro': 1,
+            'demo': 1,
+            'heavy': 1,
+            'engineer': 1,
+            'medic': 1,
+            'sniper': 1,
+            'spy': 1,
+        },
+        'valid classes': (
+            'scout',
+            'soldier',
+            'pyro',
+            'demo',
+            'heavy',
+            'engineer',
+            'medic',
+            'sniper',
+            'spy',
+        )
+    },
+}
+
+DEFAULT_SIXES_SETTINGS = {
+    'rules': {
+        'mode': 'sixes',
+        'class limits': {
+            'scout': 2,
+            'soldier': 2,
+            'demo': 1,
+            'medic': 1,
+        },
+        'valid classes': (
+            'scout',
+            'soldier',
+            'demo',
+            'medic',
+        )
+    },
+}
+
+def load_settings(filename=None):
+    if filename is None:
+        filename = path.abspath(path.join(path.dirname(__file__), '..', 'settings.yml'))
+
+    with open(filename) as f:
+        settings = yaml.load(f)
+
+    settings = _deep_merge(DEFAULT_BASE_SETTINGS, settings)
+
+    mode = settings['rules']['mode']
+    if mode == 'highlander':
+        settings = _deep_merge(DEFAULT_HIGHLANDER_SETTINGS, settings)
+    elif mode == 'sixes':
+        settings = _deep_merge(DEFAULT_SIXES_SETTINGS, settings)
+    else:
+        raise ValueError('Invalid setting rules -> mode, must be one of "highlander" or "sixes", not "%s"' % mode)
+
+    return settings
